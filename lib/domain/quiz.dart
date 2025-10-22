@@ -25,11 +25,16 @@ class Answer {
 class Quiz {
   List<Question> questions;
   List<Answer> answers = [];
+  List<Player> players = [];
 
   Quiz({required this.questions});
 
   void addAnswer(Answer asnwer) {
     this.answers.add(asnwer);
+  }
+
+  void addPlayer(Player playerName) {
+    this.players.add(playerName);
   }
 
   int getTotalPoint() {
@@ -51,4 +56,11 @@ class Quiz {
     }
     return ((totalSCore / questions.length) * 100).toInt();
   }
+}
+
+class Player {
+  final String playerName;
+  int point = 0;
+
+  Player({required this.playerName});
 }

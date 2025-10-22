@@ -1,0 +1,7 @@
+# IDEs and editors
+.idea/
+.vscode/
+.dart_tool/
+*.iml
+*.ipr
+*.iws
