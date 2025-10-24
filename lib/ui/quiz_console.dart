@@ -35,7 +35,8 @@ class QuizConsole {
 
         // Check for null input
         if (userInput != null && userInput.isNotEmpty) {
-          Answer answer = Answer(question: question, answerChoice: userInput);
+          Answer answer =
+              Answer(questionId: question.id, answerChoice: userInput);
           quiz.addAnswer(answer);
         } else {
           print('No answer entered. Skipping question.');
@@ -44,12 +45,13 @@ class QuizConsole {
         print('');
       }
       int score = quiz.getScoreInPercentage();
-      player.point = quiz.getTotalPoint();
+      int point = quiz.getTotalPoint();
+      player.point = point;
       print('$player, your score in percentage: $score %');
-      print('$player, your score in points: ${player.point}');
+      print('$player, your score in points: ${point}');
       print('');
       for (Player player in quiz.players) {
-        print('Player: ${player.playerName}\tScore: ${player.point}');
+        print('Player: ${player.playerName}\tScore: ${point}');
       }
       quiz.answers.clear();
     }

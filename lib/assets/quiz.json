@@ -1,0 +1,39 @@
+{
+    "id": "c2ce0f9c-e27d-48be-af87-a763ff85fe6f",
+    "questions": [
+        {
+            "id": "1001",
+            "title": "Capital of France?",
+            "choices": [
+                "Paris",
+                "London",
+                "Rome"
+            ],
+            "goodChoice": "Paris",
+            "point": 30
+        },
+        {
+            "id": "1002",
+            "title": "2 + 2 = ?",
+            "choices": [
+                "2",
+                "4",
+                "5"
+            ],
+            "goodChoice": "4",
+            "point": 20
+        },
+        {
+            "id": "1003",
+            "title": "Which planet is known as the Red Planet?",
+            "choices": [
+                "Earth",
+                "Mars",
+                "Jupiter",
+                "Venus"
+            ],
+            "goodChoice": "Mars",
+            "point": 50
+        }
+    ]
+}

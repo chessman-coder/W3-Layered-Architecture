@@ -1,33 +1,59 @@
+import 'package:uuid/uuid.dart';
+
+var uuid = Uuid().v4();
+
 class Question {
+  final String id;
   final String title;
   final List<String> choices;
   final String goodChoice;
   final int point;
 
   Question(
-      {required this.title,
+      {String? id,
+      required this.title,
       required this.choices,
       required this.goodChoice,
-      this.point = 1});
+      this.point = 1})
+      : id = id ?? uuid;
 }
 
 class Answer {
-  final Question question;
+  final String id;
+  final String questionId;
   final String answerChoice;
 
-  Answer({required this.question, required this.answerChoice});
+  Answer({String? id, required this.questionId, required this.answerChoice})
+      : id = id ?? uuid;
 
-  bool isGood() {
+  bool isGood(Quiz quiz) {
+    Question? question = quiz.getQuestionById(questionId);
+    if (question == null) return false;
     return this.answerChoice == question.goodChoice;
   }
 }
 
 class Quiz {
+  final String id;
   List<Question> questions;
   List<Answer> answers = [];
   List<Player> players = [];
 
-  Quiz({required this.questions});
+  Quiz({String? id, required this.questions}) : id = id ?? uuid;
+
+  Question? getQuestionById(String id) {
+    for (var question in questions) {
+      if (question.id == id) return question;
+    }
+    return null;
+  }
+
+  Answer? getAnswerById(String id) {
+    for (var answer in answers) {
+      if (answer.id == id) return answer;
+    }
+    return null;
+  }
 
   void addAnswer(Answer asnwer) {
     this.answers.add(asnwer);
@@ -40,8 +66,8 @@ class Quiz {
   int getTotalPoint() {
     int totalPoint = 0;
     for (Answer answer in answers) {
-      if (answer.isGood()) {
-        totalPoint += answer.question.point;
+      if (answer.isGood(this)) {
+        totalPoint += getQuestionById(answer.questionId)?.point ?? 0;
       }
     }
     return totalPoint;
@@ -50,7 +76,7 @@ class Quiz {
   int getScoreInPercentage() {
     int totalSCore = 0;
     for (Answer answer in answers) {
-      if (answer.isGood()) {
+      if (answer.isGood(this)) {
         totalSCore++;
       }
     }
